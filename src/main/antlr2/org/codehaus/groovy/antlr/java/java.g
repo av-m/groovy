@@ -373,7 +373,7 @@ classOrInterfaceType[boolean addImagNode]  {Token first = LT(1);}
 	:	IDENT^ (typeArguments|typeArgumentsDiamond)?
 		(options{greedy=true;}: // match as many as possible
 			DOT^
-			IDENT (typeArguments)?
+			IDENT (typeArguments|typeArgumentsDiamond)?
 		)*
 		{
 			if ( addImagNode ) {
