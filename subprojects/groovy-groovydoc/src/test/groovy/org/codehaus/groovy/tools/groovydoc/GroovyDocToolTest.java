@@ -321,6 +321,20 @@ public class GroovyDocToolTest extends GroovyTestCase {
         assertTrue("innerClassMethod found in: \"" + classWithAnonymousInnerClassDoc + "\"", !classWithAnonymousInnerClassDoc.contains("innerClassMethod"));
     }
 
+    public void testJavaNestedClassWithComment() throws Exception {
+        List<String> srcList = new ArrayList<String>();
+        String base = "org/codehaus/groovy/tools/groovydoc/testfiles/JavaNestedClassWithComment";
+        srcList.add(base + ".java");
+        xmlTool.add(srcList);
+        MockOutputTool output = new MockOutputTool();
+        xmlTool.renderToOutput(output, MOCK_DIR);
+        String doc = output.getText(MOCK_DIR + "/" + base + ".html");
+        assertNotNull("No GroovyDoc found for " + base, doc);
+        assertTrue("Outer class comment not found in: \"" + doc + "\"", doc.contains("outer class comment"));
+        assertTrue("Inner class comment not found in: \"" + doc + "\"", doc.contains("inner class comment"));
+        assertTrue("Static nested class comment not found in: \"" + doc + "\"", doc.contains("static nested class comment"));
+    }
+
     public void testJavaClassWithDiamondOperator() throws Exception {
         List<String> srcList = new ArrayList<String>();
         String base = "org/codehaus/groovy/tools/groovydoc/testfiles/JavaClassWithDiamond";
